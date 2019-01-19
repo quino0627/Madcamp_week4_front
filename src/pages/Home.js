@@ -6,39 +6,41 @@ import "../css/home.css";
 const { Header, Footer, Sider, Content } = Layout;
 const Search = Input.Search;
 
-const Home = () => {
-  return (
-    <Layout className="layout">
-      <Content>
-        <div className="top-content posts">
-          <Card title="Card title" extra={<a href="#">More</a>}>
-            <p>Card content</p>
-          </Card>
-          <Card title="Card title" extra={<a href="#">More</a>}>
-            <p>Card content</p>
-          </Card>
-          <Card title="Card title" extra={<a href="#">More</a>}>
-            <p>Card content</p>
-          </Card>
-          <Card title="Card title" extra={<a href="#">More</a>}>
-            <p>Card content</p>
-          </Card>
-          <Card title="Card title" extra={<a href="#">More</a>}>
-            <p>Card content</p>
-          </Card>
-        </div>
-        <div className="middle-content search">
-          <Search
-            className="search-bar"
-            placeholder="input search text"
-            onSearch={value => console.log(value)}
-            enterButton
-          />
-        </div>
-      </Content>
-      <Footer style={{ textAlign: "center" }}>ST?? Madcamp 4</Footer>
-    </Layout>
-  );
-};
+class Home extends Component {
+  render() {
+    return (
+      <Layout className="layout">
+        <Content>
+          <div className="top-content posts">
+            <Card title="Card title" extra={<a href="#">More</a>}>
+              <p>Card content</p>
+            </Card>
+            <Card title="Card title" extra={<a href="#">More</a>}>
+              <p>Card content</p>
+            </Card>
+            <Card title="Card title" extra={<a href="#">More</a>}>
+              <p>Card content</p>
+            </Card>
+            <Card title="Card title" extra={<a href="#">More</a>}>
+              <p>Card content</p>
+            </Card>
+            <Card title="Card title" extra={<a href="#">More</a>}>
+              <p>Card content</p>
+            </Card>
+          </div>
+          <div className="middle-content search">
+            <Search
+              className="search-bar"
+              placeholder="input search text"
+              onSearch={value => console.log(value)}
+              enterButton
+            />
+          </div>
+        </Content>
+        <Footer style={{ textAlign: "center" }}>ST?? Madcamp 4</Footer>
+      </Layout>
+    );
+  }
+}
 
 export default Home;
