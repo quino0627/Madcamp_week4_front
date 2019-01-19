@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import { Layout, Menu, Breadcrumb, Card, Modal } from "antd";
-import "../css/MMenu.css";
+import "../../../css/MMenu.css";
 const { Header, Footer, Sider, Content } = Layout;
 
 // 앱에서 다른 라우트로 이동, Link 컴포넌트 쓰면 새로고침 안됨, a href 쓰면 새로고침 된다
@@ -31,9 +31,7 @@ class MMenu extends Component {
             <Link to="/food">식당</Link>
           </Menu.Item>
         </Menu>
-        <div className="login">
-          <Link to="/login">로그인</Link>
-        </div>
+        <div className="login">{this.props.children}</div>
       </Header>
     );
   }
