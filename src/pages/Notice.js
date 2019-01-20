@@ -8,10 +8,18 @@ import {
   Avatar,
   Icon,
   Button,
-  Modal
+  Modal,
+  Input,
+  Form
 } from "antd";
 import Post from "../components/Post";
+import { UploadNoticeForm } from "../components";
 const { Header, Footer, Sider, Content } = Layout;
+const { TextArea } = Input;
+
+function hasErrors(fieldsError) {
+  return Object.keys(fieldsError).some(field => fieldsError[field]);
+}
 
 class Notice extends Component {
   state = {
@@ -26,12 +34,21 @@ class Notice extends Component {
     });
   };
 
-  handleOk = () => {
+  handleOk = e => {
     this.setState({
       ModalText: "The modal will be closed after two seconds",
       confirmLoading: true
     });
     setTimeout(() => {
+      e.preventDefault();
+      // 상태값을 onCreate 를 통하여 부모에게 전달
+      // this.props.onCreate(this.state);
+      console.log(this.state.postTitle + this.state.postContent);
+      // 상태 초기화
+      this.setState({
+        title: "",
+        content: ""
+      });
       this.setState({
         visible: false,
         confirmLoading: false
@@ -52,7 +69,6 @@ class Notice extends Component {
 
   _renderPosts = () => {
     const posts = this.state.posts.map((post, index) => {
-      console.log(post);
       return (
         <Post title={post.title} content={post.content} date={post.date} />
       );
@@ -81,6 +97,15 @@ class Notice extends Component {
     return listData;
   };
 
+  handleChange = e => {
+    this.setState({
+      [e.target.name]: e.target.value
+    });
+  };
+  handleSubmit = e => {
+    // 페이지 리로딩 방지
+  };
+
   render() {
     const { visible, confirmLoading, ModalText } = this.state;
     const { posts } = this.state;
@@ -89,7 +114,7 @@ class Notice extends Component {
         <div className="notice__row">
           <div>
             <Button type="primary" onClick={this.showModal}>
-              Open Modal with async logic
+              Upload 공지
             </Button>
             <Modal
               title="Title"
@@ -98,7 +123,26 @@ class Notice extends Component {
               confirmLoading={confirmLoading}
               onCancel={this.handleCancel}
             >
-              <p>{ModalText}</p>
+              {/* <span>Title</span>
+              <Input placeholder="Basic usage" />
+              <span>Content</span>
+              <TextArea
+                placeholder="Autosize height with minimum and maximum number of lines"
+                autosize={{ minRows: 2, maxRows: 6 }} */}
+              <form onSubmit={this.handleSubmit}>
+                <input
+                  placeholder="제목"
+                  value={this.state.postTitle}
+                  onChange={this.handleChange}
+                  name="postTitle"
+                />
+                <input
+                  placeholder="컨텐츠"
+                  value={this.state.postContent}
+                  onChange={this.handleChange}
+                  name="postContent"
+                />
+              </form>
             </Modal>
           </div>
         </div>
