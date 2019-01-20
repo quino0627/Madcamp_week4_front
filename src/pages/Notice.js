@@ -14,8 +14,12 @@ import {
 } from "antd";
 import Post from "../components/Post";
 import { UploadNoticeForm } from "../components";
+import axios from "axios";
 const { Header, Footer, Sider, Content } = Layout;
 const { TextArea } = Input;
+const axiosInstance = axios.create({
+  baseURL: ""
+});
 
 function hasErrors(fieldsError) {
   return Object.keys(fieldsError).some(field => fieldsError[field]);
@@ -44,6 +48,18 @@ class Notice extends Component {
       // 상태값을 onCreate 를 통하여 부모에게 전달
       // this.props.onCreate(this.state);
       console.log(this.state.postTitle + this.state.postContent);
+      axiosInstance
+        .post("http://143.248.140.106:680/api/notice", {
+          nick: "Fred",
+          title: this.state.postTitle,
+          content: this.state.postContent
+        })
+        .then(function(response) {
+          console.log(response);
+        })
+        .catch(function(error) {
+          console.log(error);
+        });
       // 상태 초기화
       this.setState({
         title: "",
