@@ -5,7 +5,7 @@ const { Header, Footer, Sider, Content } = Layout;
 class Notice extends Component {
   render() {
     const listData = [];
-    for (let i = 0; i < 23; i++) {
+    for (let i = 0; i < 70; i++) {
       listData.push({
         href: "http://ant.design",
         title: `ant design part ${i}`,
@@ -28,11 +28,6 @@ class Notice extends Component {
     return (
       <Layout>
         <Content style={{ padding: "0 50px", marginTop: 64 }}>
-          <Breadcrumb style={{ margin: "16px 0" }}>
-            <Breadcrumb.Item>Home</Breadcrumb.Item>
-            <Breadcrumb.Item>List</Breadcrumb.Item>
-            <Breadcrumb.Item>App</Breadcrumb.Item>
-          </Breadcrumb>
           <div style={{ background: "#fff", padding: 24, minHeight: 380 }}>
             <List
               itemLayout="vertical"
