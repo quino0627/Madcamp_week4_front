@@ -95,6 +95,7 @@ class Notice extends Component {
   _getPosts = async () => {
     const posts = await this._callApi();
     console.log("awaiting in getPosts");
+    console.log(posts);
     this.setState({
       posts
     });
@@ -102,15 +103,32 @@ class Notice extends Component {
 
   _callApi = () => {
     const listData = [];
-    for (let i = 0; i < 23; i++) {
-      listData.push({
-        title: `ant design part ${i}`,
-        date: "20181111",
-        content:
-          "We supply a series of design principles, practical patterns and high quality design resources (Sketch and Axure), to help people create their product prototypes beautifully and efficiently."
+    // for (let i = 0; i < 23; i++) {
+    //   listData.push({
+    //     title: `ant design part ${i}`,
+    //     date: "20181111",
+    //     content:
+    //       "We supply a series of design principles, practical patterns and high quality design resources (Sketch and Axure), to help people create their product prototypes beautifully and efficiently."
+    //   });
+    // }
+
+    // return fetch("http://143.248.140.106:680/api/notice")
+    //   .then(potato => {
+    //     console.log(potato.json());
+    //     return potato.json();
+    //   })
+    //   .then(json => {
+    //     console.log(json);
+    //     console.log(json.data);
+    //     return json.data;
+    //   }) //화살표 표시는 리턴작성할필요없음 모던js라서 자동임
+    //   .catch(err => console.log(err));
+    axiosInstance
+      .get("http://143.248.140.106:680/api/notice")
+      .then(function(response) {
+        console.log(response.data);
+        return response.data;
       });
-    }
-    return listData;
   };
 
   handleChange = e => {
