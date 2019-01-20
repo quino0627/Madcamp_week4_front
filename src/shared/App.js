@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Route, Switch } from "react-router-dom";
-import { Home, Chat, Exchange, Food, Notice, Review, Login } from "pages";
+import { Home, Chat, Exchange, Food, Notice, Review, Auth } from "pages";
 import MMenu from "components/MMenu";
 
 class App extends Component {
@@ -16,7 +16,7 @@ class App extends Component {
         <Route path="/food" component={Food} />
         <Route path="/notice" component={Notice} />
         <Route path="/review" component={Review} />
-        <Route path="/login" component={Login} />
+        <Route path="/auth" component={Auth} />
       </div>
     );
   }
