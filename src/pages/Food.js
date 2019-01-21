@@ -3,6 +3,7 @@ import axios from "axios";
 import FoodElement from "../components/";
 import { FoodColumn } from "../components/";
 import { Modal, Button } from "antd";
+import "../components/Food.css";
 const token = "gArHoycVk4OMqAfR8G2MNfCIIXBHmfsu61mEldQCKyCrh93WXy";
 
 class Food extends Component {
@@ -36,8 +37,9 @@ class Food extends Component {
   render() {
     return (
       <div>
-        <div>
+        <div className="school__buttons">
           <Button
+            className="school__button"
             type="primary"
             onClick={() => this.showModal("DGIST")}
             title="DGIST"
@@ -45,6 +47,7 @@ class Food extends Component {
             Open DGIST
           </Button>
           <Button
+            className="school__button"
             type="primary"
             onClick={() => this.showModal("KAIST")}
             title="KAIST"
@@ -52,6 +55,7 @@ class Food extends Component {
             Open KAIST
           </Button>
           <Button
+            className="school__button"
             type="primary"
             onClick={() => this.showModal("UNIST")}
             title="UNIST"
@@ -59,6 +63,7 @@ class Food extends Component {
             Open UNIST
           </Button>
           <Button
+            className="school__button"
             type="primary"
             onClick={() => this.showModal("GIST")}
             title="GIST"
@@ -66,6 +71,7 @@ class Food extends Component {
             Open GIST
           </Button>
           <Button
+            className="school__button"
             type="primary"
             onClick={() => this.showModal("POSTECH")}
             title="POSTECH"
