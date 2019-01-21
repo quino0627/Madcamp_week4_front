@@ -11,13 +11,13 @@ class Post extends Component {
   };
   handleSubmit = e => {
     e.preventDefault();
-    this.props.callback("qdsd");
+    this.props.onCreate(this.state);
     console.log("123");
   };
   render() {
     return (
       <div className="post" onSubmit={this.handleSubmit}>
-        <form>
+        <form onSubmit={this.handleSubmit}>
           <div className="post__columns">
             <h1 className="post_title">{this.state.title1}</h1>
           </div>

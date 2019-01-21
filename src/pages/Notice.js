@@ -52,7 +52,12 @@ class Notice extends Component {
   _renderPosts = () => {
     const posts = this.state.posts.map((post, index) => {
       return (
-        <Post title={post.title} content={post.content} date={post.date} />
+        <Post
+          onCreate={this.handleCreate}
+          title={post.title}
+          content={post.content}
+          date={post.date}
+        />
       );
     });
     return posts;
@@ -139,10 +144,11 @@ class Notice extends Component {
         console.log(error);
       });
   };
-  /*
-  handleCreate = () => {
-    console.log("asd");
-  };*/
+
+  handleCreate = data => {
+    console.log(data);
+  };
+
   myCallback = data => {
     console.log(data);
   };
