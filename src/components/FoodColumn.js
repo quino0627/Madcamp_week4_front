@@ -22,12 +22,23 @@ let schoolId = "tqbAESBISp"; //default : korea univ
 
 class FoodColumn extends Component {
   state = {};
+
   componentDidMount() {
     this._getPosts();
   }
+  componentWillReceiveProps(nextProps) {
+    // this.props 는 아직 바뀌지 않은 상태
+    console.log("nextProp is ", nextProps);
+    this._getPosts(nextProps.title);
+  }
 
-  _classifySchool = () => {
-    switch (this.props.title) {
+  // componentDidUpdate(prevProps, prevState, snapshot) {
+  //   this._getPosts();
+  // }
+
+  _classifySchool = aaa => {
+    console.log("classifySCHOOL" + aaa);
+    switch (aaa) {
       case "KAIST":
         schoolId = "JEnfpqCUuR";
         break;
@@ -44,33 +55,34 @@ class FoodColumn extends Component {
         schoolId = "3hXYy5crHG";
         break;
       default:
+        schoolId = "tqbAESBISp";
+        break;
     }
+    this.setState({
+      schoolId
+    });
+    return schoolId;
   };
 
   _renderPosts = () => {
     console.log(this.state.posts);
     const posts = this.state.posts.map((post, index) => {
-      console.log(post);
-      console.log(index);
-      console.log(post.name, post.menus);
       return <FoodElement name={post.name} menus={post.menus} />;
     });
     return posts;
   };
 
-  _getPosts = async () => {
-    const posts = await this._callApi();
+  _getPosts = async aaa => {
+    const posts = await this._callApi(aaa);
 
-    console.log("awaiting in getPosts");
-    console.log(posts);
     this.setState({
       posts
     });
-    console.log("done");
   };
 
-  _callApi = () => {
-    this._classifySchool();
+  _callApi = aaa => {
+    let qq = this._classifySchool(aaa);
+
     // for (let i = 0; i < 23; i++) {
     //   listData.push({
     //     title: `ant design part ${i}`,
@@ -100,15 +112,15 @@ class FoodColumn extends Component {
         config
       )
       .then(function(response) {
-        console.log(response.data.stores);
-
+        console.log(schoolId);
         return response.data.stores;
       });
   };
 
   render() {
+    // this._getPosts();
     const { posts } = this.state;
-    console.log(ISODate);
+
     return (
       <div className="food__column">
         <div className="title">{this.props.title}</div>
