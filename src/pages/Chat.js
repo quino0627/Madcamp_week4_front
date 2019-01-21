@@ -187,7 +187,7 @@ class Chat extends Component {
     return (
       <div className="Chat">
         <div className="App-header">
-          <h1>My Chat App</h1>
+          <h1>Chatting</h1>
         </div>
         <Messages
           messages={this.state.messages}

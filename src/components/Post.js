@@ -17,11 +17,7 @@ class Post extends Component {
   };
   handleSubmit = e => {
     e.preventDefault();
-<<<<<<< HEAD
-    this.props.callback(this.state);
-=======
     this.props.onCreate(this.state);
->>>>>>> c7569ef78c0f80ee057b5f5e90f1b7cb0df66a28
     console.log("123");
   };
   render() {

@@ -29,9 +29,18 @@ class Notice extends Component {
   state = {
     ModalText: "Content of the modal",
     visible: false,
-    confirmLoading: false
+    confirmLoading: false,
+    visibles: false,
+    titles: "",
+    contents: ""
   };
-
+  /*
+  showModals = () => {
+    this.setState({
+      visibles: true
+    });
+  };
+  */
   showModal = () => {
     this.setState({
       visible: true
@@ -44,7 +53,12 @@ class Notice extends Component {
       visible: false
     });
   };
-
+  handleCancels = () => {
+    console.log("Clicked cancel button");
+    this.setState({
+      visibles: false
+    });
+  };
   componentDidMount() {
     this._getPosts();
   }
@@ -112,6 +126,12 @@ class Notice extends Component {
     // 페이지 리로딩 방지
   };
 
+  handleOks = e => {
+    console.log(e);
+    this.setState({
+      visibles: false
+    });
+  };
   handleOk = e => {
     this.setState({
       ModalText: "The modal will be closed after two seconds",
@@ -148,13 +168,18 @@ class Notice extends Component {
 
   handleCreate = data => {
     console.log(data);
+    this.setState({
+      titles: "Aasdasd",
+      contents: "ASDASD",
+      visibles: true
+    });
   };
 
   myCallback = data => {
     console.log(data);
   };
   render() {
-    const { visible, confirmLoading, ModalText } = this.state;
+    const { visible, confirmLoading, ModalText, visibles } = this.state;
     const { posts } = this.state;
     return (
       <div className={posts ? "Notice" : "Notice-loading"}>
@@ -192,6 +217,12 @@ class Notice extends Component {
                 />
               </form>
             </Modal>
+            <Modal
+              title={this.state.title1}
+              visible={this.state.visibles}
+              onOk={this.handleOks}
+              onCancel={this.handleCancels}
+            />
           </div>
         </div>
         <div className="notice__row">
