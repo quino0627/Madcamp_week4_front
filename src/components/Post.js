@@ -1,17 +1,33 @@
-import React from "react";
+import React, { Component } from "react";
 import "./Post.css";
 import LinesEllipsis from "react-lines-ellipsis";
+import { Form } from "react-form";
 
-const Post = ({ title, content, date }) => {
-  return (
-    <div className="post">
-      <div className="post__columns">
-        <h1 className="post_title">{title}</h1>
+class Post extends Component {
+  state = {
+    title1: this.props.title,
+    date1: this.props.date,
+    content1: this.props.content
+  };
+  handleSubmit = e => {
+    e.preventDefault();
+    this.props.callback("qdsd");
+    console.log("123");
+  };
+  render() {
+    return (
+      <div className="post" onSubmit={this.handleSubmit}>
+        <form>
+          <div className="post__columns">
+            <h1 className="post_title">{this.state.title1}</h1>
+          </div>
+          <div className="post__columns">{this.state.date1}</div>
+          <div className="post__columns">{this.state.content1}</div>
+          <button type="submit">more..</button>
+        </form>
       </div>
-      <div className="post__columns">{date}</div>
-      <div className="post__columns">{content}</div>
-    </div>
-  );
-};
+    );
+  }
+}
 
 export default Post;

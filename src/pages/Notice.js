@@ -140,12 +140,19 @@ class Notice extends Component {
         console.log(error);
       });
   };
-
+  /*
+  handleCreate = () => {
+    console.log("asd");
+  };*/
+  myCallback = data => {
+    console.log(data);
+  };
   render() {
     const { visible, confirmLoading, ModalText } = this.state;
     const { posts } = this.state;
     return (
       <div className={posts ? "Notice" : "Notice-loading"}>
+        <Post callback={this.myCallback} />
         <div className="notice__row">
           <div>
             <Button type="primary" onClick={this.showModal}>
