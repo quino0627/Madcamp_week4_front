@@ -169,12 +169,11 @@ class Notice extends Component {
   handleCreate = data => {
     console.log(data);
     this.setState({
-      titles: "Aasdasd",
-      contents: "ASDASD",
+      titles: data.title1,
+      contents: data.content1,
       visibles: true
     });
   };
-
   myCallback = data => {
     console.log(data);
   };
@@ -218,11 +217,13 @@ class Notice extends Component {
               </form>
             </Modal>
             <Modal
-              title={this.state.title1}
+              title={this.state.titles}
               visible={this.state.visibles}
               onOk={this.handleOks}
               onCancel={this.handleCancels}
-            />
+            >
+              <span>{this.state.contents}</span>
+            </Modal>
           </div>
         </div>
         <div className="notice__row">
