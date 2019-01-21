@@ -9,15 +9,7 @@ const Post = ({ title, content, date }) => {
         <h1 className="post_title">{title}</h1>
       </div>
       <div className="post__columns">{date}</div>
-      <div className="post__columns">
-        <LinesEllipsis
-          text={content}
-          maxLine="3"
-          ellipsos=" ..."
-          trimRight
-          basedOn="letters"
-        />
-      </div>
+      <div className="post__columns">{content}</div>
     </div>
   );
 };

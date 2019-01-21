@@ -38,40 +38,6 @@ class Notice extends Component {
     });
   };
 
-  handleOk = e => {
-    this.setState({
-      ModalText: "The modal will be closed after two seconds",
-      confirmLoading: true
-    });
-    setTimeout(() => {
-      e.preventDefault();
-      // 상태값을 onCreate 를 통하여 부모에게 전달
-      // this.props.onCreate(this.state);
-      console.log(this.state.postTitle + this.state.postContent);
-      axiosInstance
-        .post("http://143.248.140.106:680/api/notice", {
-          nick: "Fred",
-          title: this.state.postTitle,
-          content: this.state.postContent
-        })
-        .then(function(response) {
-          console.log(response);
-        })
-        .catch(function(error) {
-          console.log(error);
-        });
-      // 상태 초기화
-      this.setState({
-        title: "",
-        content: ""
-      });
-      this.setState({
-        visible: false,
-        confirmLoading: false
-      });
-    }, 2000);
-  };
-
   handleCancel = () => {
     console.log("Clicked cancel button");
     this.setState({
@@ -94,6 +60,7 @@ class Notice extends Component {
 
   _getPosts = async () => {
     const posts = await this._callApi();
+    posts.reverse();
     console.log("awaiting in getPosts");
     console.log(posts);
     this.setState({
@@ -122,8 +89,8 @@ class Notice extends Component {
     //     console.log(json.data);
     //     return json.data;
     //   }) //화살표 표시는 리턴작성할필요없음 모던js라서 자동임
-    //   .catch(err => console.log(err));
-    axiosInstance
+    //  .catch(err => console.log(err));
+    return axiosInstance
       .get("http://143.248.140.106:680/api/notice")
       .then(function(response) {
         console.log(response.data);
@@ -138,6 +105,41 @@ class Notice extends Component {
   };
   handleSubmit = e => {
     // 페이지 리로딩 방지
+  };
+
+  handleOk = e => {
+    this.setState({
+      ModalText: "The modal will be closed after two seconds",
+      confirmLoading: true
+    });
+    setTimeout(() => {
+      e.preventDefault();
+      // 상태값을 onCreate 를 통하여 부모에게 전달
+      // this.props.onCreate(this.state);
+      console.log(this.state.postTitle + this.state.postContent);
+      axiosInstance
+        .post("http://143.248.140.106:680/api/notice", {
+          nick: "Fred",
+          title: this.state.postTitle,
+          content: this.state.postContent
+        })
+        .then(function(response) {
+          console.log(response);
+        })
+        .catch(function(error) {
+          console.log(error);
+        });
+      // 상태 초기화
+      this.setState({
+        postTitle: "",
+        postContent: ""
+      });
+      this.setState({
+        visible: false,
+        confirmLoading: false
+      });
+      window.location.reload();
+    }, 2000);
   };
 
   render() {
