@@ -4,6 +4,12 @@ import LinesEllipsis from "react-lines-ellipsis";
 import { Form } from "react-form";
 
 class Post extends Component {
+  /*
+  constructor() {
+    super();
+    // Good Solution: Bind it in here!
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }*/
   state = {
     title1: this.props.title,
     date1: this.props.date,
@@ -11,7 +17,7 @@ class Post extends Component {
   };
   handleSubmit = e => {
     e.preventDefault();
-    this.props.callback("qdsd");
+    this.props.callback(this.state);
     console.log("123");
   };
   render() {
