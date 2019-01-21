@@ -69,7 +69,6 @@ class Notice extends Component {
   };
 
   _callApi = () => {
-    const listData = [];
     // for (let i = 0; i < 23; i++) {
     //   listData.push({
     //     title: `ant design part ${i}`,
