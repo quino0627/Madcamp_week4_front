@@ -112,34 +112,33 @@ class Notice extends Component {
       ModalText: "The modal will be closed after two seconds",
       confirmLoading: true
     });
-    setTimeout(() => {
-      e.preventDefault();
-      // 상태값을 onCreate 를 통하여 부모에게 전달
-      // this.props.onCreate(this.state);
-      console.log(this.state.postTitle + this.state.postContent);
-      axiosInstance
-        .post("http://143.248.140.106:680/api/notice", {
-          nick: "Fred",
-          title: this.state.postTitle,
-          content: this.state.postContent
-        })
-        .then(function(response) {
-          console.log(response);
-        })
-        .catch(function(error) {
-          console.log(error);
+
+    e.preventDefault();
+    // 상태값을 onCreate 를 통하여 부모에게 전달
+    // this.props.onCreate(this.state);
+    console.log(this.state.postTitle + this.state.postContent);
+    axiosInstance
+      .post("http://143.248.140.106:680/api/notice", {
+        nick: "Fred",
+        title: this.state.postTitle,
+        content: this.state.postContent
+      })
+      .then(function(response) {
+        console.log(response);
+        window.location.reload();
+        // 상태 초기화
+        this.setState({
+          postTitle: "",
+          postContent: ""
         });
-      // 상태 초기화
-      this.setState({
-        postTitle: "",
-        postContent: ""
+        this.setState({
+          visible: false,
+          confirmLoading: false
+        });
+      })
+      .catch(function(error) {
+        console.log(error);
       });
-      this.setState({
-        visible: false,
-        confirmLoading: false
-      });
-      window.location.reload();
-    }, 2000);
   };
 
   render() {
