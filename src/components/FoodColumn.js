@@ -123,7 +123,6 @@ class FoodColumn extends Component {
 
     return (
       <div className="food__column">
-        <div className="title">{this.props.title}</div>
         {posts ? this._renderPosts() : "loading"}
       </div>
     );

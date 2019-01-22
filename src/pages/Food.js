@@ -80,7 +80,7 @@ class Food extends Component {
           </Button>
         </div>
         <Modal
-          title="Basic Modal"
+          title={this.state.schoolTitle}
           visible={this.state.visible}
           onOk={this.handleOk}
           onCancel={this.handleCancel}

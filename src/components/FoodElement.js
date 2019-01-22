@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import "./Food.css";
+import { Card } from "antd";
 
 class FoodElement extends Component {
   _renderMenus = () => {
@@ -7,7 +8,7 @@ class FoodElement extends Component {
       if (menu.description.includes("http")) {
         return <img className="menu__img" src={menu.description} alt="" />;
       } else {
-        return <div>{menu.description}</div>;
+        return <p>{menu.description}</p>;
       }
     });
     return mmmm;
@@ -15,8 +16,9 @@ class FoodElement extends Component {
   render() {
     return (
       <div className="food__element">
-        <span>{this.props.name}</span>
-        {this._renderMenus()}
+        <Card title={this.props.name} bordered={false}>
+          {this._renderMenus()}
+        </Card>
       </div>
     );
   }
