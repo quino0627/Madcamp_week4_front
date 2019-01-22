@@ -216,11 +216,16 @@ class Notice extends Component {
                   name="postContent"
                 />
                 <div>
-                  <Input size="large" placeholder="large size" />
+                  <Input
+                    size="large"
+                    placeholder="large size"
+                    onChange={this.handleChange}
+                  />
                   <div style={{ margin: "24px 0" }} />
                   <TextArea
                     placeholder="Autosize height with minimum and maximum number of lines"
                     autosize={{ minRows: 5, maxRows: 10 }}
+                    onChange={this.handleChange}
                   />
                 </div>
                 ,

@@ -18,13 +18,30 @@
 }
 
 .school__buttons {
-  display: flex;
+  /* display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: center; */
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  grid-gap: 3px;
 }
 
 .school__button {
-  margin: 50px 0 0 0;
-  width: 50vh;
-  height: 7vh;
+  width: 20vh;
+  height: 20vh;
+}
+
+.today__date {
+  margin-top: 50px;
+}
+
+.top__div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  height: 50vh;
+}
+.sch__img {
+  max-width: 100%;
 }

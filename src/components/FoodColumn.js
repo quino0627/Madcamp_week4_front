@@ -24,7 +24,7 @@ class FoodColumn extends Component {
   state = {};
 
   componentDidMount() {
-    this._getPosts();
+    this._getPosts(this.props.title);
   }
   componentWillReceiveProps(nextProps) {
     // this.props 는 아직 바뀌지 않은 상태

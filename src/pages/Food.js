@@ -6,6 +6,10 @@ import { Modal, Button } from "antd";
 import "../components/Food.css";
 const token = "gArHoycVk4OMqAfR8G2MNfCIIXBHmfsu61mEldQCKyCrh93WXy";
 
+var d = new Date();
+var ISOData = d.toISOString();
+var ISODate = ISOData.split("T", 1);
+
 class Food extends Component {
   state = { visible: false, schoolTitle: "KOREA" };
 
@@ -36,47 +40,65 @@ class Food extends Component {
 
   render() {
     return (
-      <div>
+      <div className="top__div">
+        <div className="today__date">
+          <h1>{ISODate} Menu</h1>
+        </div>
         <div className="school__buttons">
           <Button
             className="school__button"
-            type="primary"
             onClick={() => this.showModal("DGIST")}
             title="DGIST"
           >
-            Open DGIST
+            <img
+              className="sch__img"
+              src="https://www.dgist.ac.kr/kr/img/sub01/his_top.png"
+              alt=""
+            />
           </Button>
           <Button
             className="school__button"
-            type="primary"
             onClick={() => this.showModal("KAIST")}
             title="KAIST"
           >
-            Open KAIST
+            <img
+              className="sch__img"
+              src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/0a/KAIST_logo.svg/175px-KAIST_logo.svg.png"
+              alt=""
+            />
           </Button>
           <Button
             className="school__button"
-            type="primary"
             onClick={() => this.showModal("UNIST")}
             title="UNIST"
           >
-            Open UNIST
+            <img
+              className="sch__img"
+              src="http://kim2dir.unist.ac.kr/images/icons/UNIST.png"
+              alt=""
+            />
           </Button>
           <Button
             className="school__button"
-            type="primary"
             onClick={() => this.showModal("GIST")}
             title="GIST"
           >
-            Open GIST
+            <img
+              className="sch__img"
+              src="http://soslab.co/wp-content/uploads/2017/01/GIST.png"
+              alt=""
+            />
           </Button>
           <Button
             className="school__button"
-            type="primary"
             onClick={() => this.showModal("POSTECH")}
             title="POSTECH"
           >
-            Open POSTECH
+            <img
+              className="sch__img"
+              src="https://upload.wikimedia.org/wikipedia/en/thumb/a/a5/POSTECH_emblem.svg/150px-POSTECH_emblem.svg.png"
+              alt=""
+            />
           </Button>
         </div>
         <Modal
