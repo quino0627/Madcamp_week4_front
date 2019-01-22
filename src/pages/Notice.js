@@ -119,79 +119,6 @@ class Notice extends React.Component {
       visibles: false
     });
   };
-  componentDidMount() {
-    this._getPosts();
-  }
-
-  _renderPosts = () => {
-    const posts = this.state.posts.map((post, index) => {
-      return (
-        <Post
-          onCreate={this.handleCreate}
-          title={post.title}
-          content={post.content}
-          date={post.date}
-        />
-      );
-    });
-    return posts;
-  };
-
-  _getPosts = async () => {
-    const posts = await this._callApi();
-    posts.reverse();
-    console.log("awaiting in getPosts");
-    console.log(posts);
-    this.setState({
-      posts
-    });
-  };
-
-  _callApi = () => {
-    const listData = [];
-    // for (let i = 0; i < 23; i++) {
-    //   listData.push({
-    //     title: `ant design part ${i}`,
-    //     date: "20181111",
-    //     content:
-    //       "We supply a series of design principles, practical patterns and high quality design resources (Sketch and Axure), to help people create their product prototypes beautifully and efficiently."
-    //   });
-    // }
-
-    // return fetch("http://143.248.140.106:680/api/notice")
-    //   .then(potato => {
-    //     console.log(potato.json());
-    //     return potato.json();
-    //   })
-    //   .then(json => {
-    //     console.log(json);
-    //     console.log(json.data);
-    //     return json.data;
-    //   }) //화살표 표시는 리턴작성할필요없음 모던js라서 자동임
-    //  .catch(err => console.log(err));
-    return axiosInstance
-      .get("http://143.248.140.106:680/api/notice", {withCredentials:true})
-      .then(function(response) {
-        console.log(response.data);
-        return response.data;
-      });
-  };
-
-  handleChange = e => {
-    this.setState({
-      [e.target.name]: e.target.value
-    });
-  };
-  handleSubmit = e => {
-    // 페이지 리로딩 방지
-  };
-
-  handleOks = e => {
-    console.log(e);
-    this.setState({
-      visibles: false
-    });
-  };
   handleOk = e => {
     this.setState({
       ModalText: "The modal will be closed after two seconds",
@@ -203,7 +130,7 @@ class Notice extends React.Component {
     // this.props.onCreate(this.state);
     console.log(this.state.postTitle + this.state.postContent);
     axiosInstance
-      .post("http://143.248.140.106:680/api/notice", {withCredentials:true}, {
+      .post("http://143.248.140.106:680/api/notice", {
         nick: "Fred",
         title: this.state.postTitle,
         content: this.state.postContent
@@ -245,6 +172,20 @@ class Notice extends React.Component {
       posts
     });
   };
+  _callApi = () => {
+    return axiosInstance
+      .get("http://143.248.140.106:680/api/notice")
+      .then(function(response) {
+        console.log(response.data);
+        return response.data;
+      });
+  };
+  handleChange = e => {
+    this.setState({
+      [e.target.name]: e.target.value
+    });
+  };
+
   render() {
     const columns = [
       {
@@ -274,30 +215,41 @@ class Notice extends React.Component {
     const { visible, confirmLoading, ModalText, visibles } = this.state;
     const { posts } = this.state;
     return (
-      <div className={posts ? "Notice" : "Notice-loading"}>
-        <Post callback={this.myCallback} />
-        <div className="notice__row">
-          <div>
-            <Button type="primary" onClick={this.showModal}>
-              공지 올리기
-            </Button>
-            <Modal
-              title="공지 올리기"
-              visible={visible}
-              onOk={this.handleOk}
-              confirmLoading={confirmLoading}
-              onCancel={this.handleCancel}
-            >
-              {/* <span>Title</span>
-              <Input placeholder="Basic usage" />
-              <span>Content</span>
-              <TextArea
-                placeholder="Autosize height with minimum and maximum number of lines"
-                autosize={{ minRows: 2, maxRows: 6 }} */}
-              <form onSubmit={this.handleSubmit}>
-                <input
-                  placeholder="제목"
-                  value={this.state.postTitle}
+      <div>
+        <div className="notice__column1">
+          <Button type="primary" onClick={this.showModal}>
+            Upload
+          </Button>
+          <Modal
+            title="공지 올리기"
+            visible={visible}
+            onOk={this.handleOk}
+            confirmLoading={confirmLoading}
+            onCancel={this.handleCancel}
+          >
+            {/* <span>Title</span>
+          <Input placeholder="Basic usage" />
+          <span>Content</span>
+          <TextArea
+            placeholder="Autosize height with minimum and maximum number of lines"
+            autosize={{ minRows: 2, maxRows: 6 }} */}
+            <form onSubmit={this.handleSubmit}>
+              <input
+                placeholder="제목"
+                value={this.state.postTitle}
+                onChange={this.handleChange}
+                name="postTitle"
+              />
+              <input
+                placeholder="컨텐츠"
+                value={this.state.postContent}
+                onChange={this.handleChange}
+                name="postContent"
+              />
+              <div>
+                <Input
+                  size="large"
+                  placeholder="large size"
                   onChange={this.handleChange}
                 />
                 <div style={{ margin: "24px 0" }} />
