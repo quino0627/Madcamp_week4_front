@@ -10,6 +10,7 @@ import {
   Button,
   Modal,
   Input,
+  Table,
   Form
 } from "antd";
 import Post from "../components/Post";

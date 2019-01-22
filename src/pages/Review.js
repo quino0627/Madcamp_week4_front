@@ -3,6 +3,7 @@ import Post from "../components/Post";
 import axios from "axios";
 import {
   Layout,
+  Card,
   Menu,
   Breadcrumb,
   Pagination,
@@ -54,12 +55,22 @@ class Review extends Component {
   _renderPosts = () => {
     const posts = this.state.posts.map((post, index) => {
       return (
-        <Post
-          onCreate={this.handleCreate}
+        // <Post
+        //   onCreate={this.handleCreate}
+        //   title={post.title}
+        //   content={post.content}
+        //   date={post.date}
+        // />
+
+        <Card
           title={post.title}
-          content={post.content}
-          date={post.date}
-        />
+          bordered={false}
+          style={{ width: 300 }}
+          onCreate={this.handleCreate}
+        >
+          <p>{post.date}</p>
+          <p>{post.content}</p>
+        </Card>
       );
     });
     return posts;
