@@ -105,6 +105,7 @@ class Food extends Component {
           title={this.state.schoolTitle}
           visible={this.state.visible}
           onOk={this.handleOk}
+          onCancel={this.handleCancel}
           footer={[
             <Button type="primary" key="Ok" onClick={this.handleOk}>
               Ok

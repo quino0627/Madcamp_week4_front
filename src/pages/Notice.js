@@ -110,7 +110,7 @@ class Notice extends Component {
     //   }) //화살표 표시는 리턴작성할필요없음 모던js라서 자동임
     //  .catch(err => console.log(err));
     return axiosInstance
-      .get("http://143.248.140.106:680/api/notice")
+      .get("http://143.248.140.106:680/api/notice", {withCredentials:true})
       .then(function(response) {
         console.log(response.data);
         return response.data;
@@ -143,7 +143,7 @@ class Notice extends Component {
     // this.props.onCreate(this.state);
     console.log(this.state.postTitle + this.state.postContent);
     axiosInstance
-      .post("http://143.248.140.106:680/api/notice", {
+      .post("http://143.248.140.106:680/api/notice", {withCredentials:true}, {
         nick: "Fred",
         title: this.state.postTitle,
         content: this.state.postContent
@@ -177,6 +177,19 @@ class Notice extends Component {
   myCallback = data => {
     console.log(data);
   };
+
+  checkSession = () => {
+    axiosInstance.get('http://143.248.140.106:680/api/sess',{withCredentials:true})
+    .then((response) => {
+        console.log(response)
+    })
+    .catch(function(err){
+        console.log(err);
+    })
+  }
+
+
+
   render() {
     const { visible, confirmLoading, ModalText, visibles } = this.state;
     const { posts } = this.state;
@@ -185,6 +198,9 @@ class Notice extends Component {
         <Post callback={this.myCallback} />
         <div className="notice__row">
           <div>
+            <button onClick={this.checkSession}>
+              확인용
+            </button>
             <Button type="primary" onClick={this.showModal}>
               공지 올리기
             </Button>
