@@ -186,10 +186,10 @@ class Notice extends Component {
         <div className="notice__row">
           <div>
             <Button type="primary" onClick={this.showModal}>
-              Upload 공지
+              공지 올리기
             </Button>
             <Modal
-              title="Title"
+              title="공지 올리기"
               visible={visible}
               onOk={this.handleOk}
               confirmLoading={confirmLoading}
@@ -214,6 +214,15 @@ class Notice extends Component {
                   onChange={this.handleChange}
                   name="postContent"
                 />
+                <div>
+                  <Input size="large" placeholder="large size" />
+                  <div style={{ margin: "24px 0" }} />
+                  <TextArea
+                    placeholder="Autosize height with minimum and maximum number of lines"
+                    autosize={{ minRows: 5, maxRows: 10 }}
+                  />
+                </div>
+                ,
               </form>
             </Modal>
             <Modal

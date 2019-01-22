@@ -186,9 +186,6 @@ class Chat extends Component {
   render() {
     return (
       <div className="Chat">
-        <div className="App-header">
-          <h1>Chatting</h1>
-        </div>
         <Messages
           messages={this.state.messages}
           currentMember={this.state.member}
