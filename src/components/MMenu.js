@@ -21,9 +21,7 @@ class MMenu extends Component {
           <Menu.Item key="2">
             <Link to="/review">후기</Link>
           </Menu.Item>
-          <Menu.Item key="3">
-            <Link to="/exchange">교류</Link>
-          </Menu.Item>
+
           <Menu.Item key="4">
             <Link to="/chat">채팅</Link>
           </Menu.Item>

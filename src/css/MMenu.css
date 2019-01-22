@@ -1,5 +1,9 @@
 @import "~antd/dist/antd.css";
 
+body {
+  background-color: #f0f2f5;
+}
+
 .logo {
   width: 120px;
   height: 31px;

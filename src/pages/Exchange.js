@@ -19,31 +19,9 @@ const axiosInstance = axios.create({
   baseURL: ""
 });
 const { TextArea } = Input;
-const columns = [
-  {
-    title: "_id",
-    dataIndex: "_id",
-    key: "_id",
-    render: text => <a href="javascript:;">{text}</a>
-  },
-  {
-    title: "Age",
-    dataIndex: "nick",
-    key: "nick"
-  },
-  {
-    title: "Title",
-    dataIndex: "title",
-    key: "title"
-  },
-  {
-    title: "Content",
-    key: "content",
-    dataIndex: "content"
-  }
-];
+
 const renderModal = record => record.title;
-class Exchange extends Component {
+class Exchange extends React.Component {
   state = {
     //title: "",
     visible: false,
@@ -54,6 +32,75 @@ class Exchange extends Component {
     contents: "",
     searchText: ""
   };
+  getColumnSearchProps = dataIndex => ({
+    filterDropdown: ({
+      setSelectedKeys,
+      selectedKeys,
+      confirm,
+      clearFilters
+    }) => (
+      <div style={{ padding: 8 }}>
+        <Input
+          ref={node => {
+            this.searchInput = node;
+          }}
+          placeholder={`Search ${dataIndex}`}
+          value={selectedKeys[0]}
+          onChange={e =>
+            setSelectedKeys(e.target.value ? [e.target.value] : [])
+          }
+          onPressEnter={() => this.handleSearch(selectedKeys, confirm)}
+          style={{ width: 188, marginBottom: 8, display: "block" }}
+        />
+        <Button
+          type="primary"
+          onClick={() => this.handleSearch(selectedKeys, confirm)}
+          icon="search"
+          size="small"
+          style={{ width: 90, marginRight: 8 }}
+        >
+          Search
+        </Button>
+        <Button
+          onClick={() => this.handleReset(clearFilters)}
+          size="small"
+          style={{ width: 90 }}
+        >
+          Reset
+        </Button>
+      </div>
+    ),
+    filterIcon: filtered => (
+      <Icon type="search" style={{ color: filtered ? "#1890ff" : undefined }} />
+    ),
+    onFilter: (value, record) =>
+      ("" + record[dataIndex]).toLowerCase().includes(value.toLowerCase()),
+    onFilterDropdownVisibleChange: visible => {
+      if (visible) {
+        setTimeout(() => this.searchInput.select());
+      }
+    },
+    render: text => (
+      <Highlighter
+        highlightStyle={{ backgroundColor: "#ffc069", padding: 0 }}
+        searchWords={[this.state.searchText]}
+        autoEscape
+        textToHighlight={"" + text}
+      />
+    )
+  });
+
+  handleSearch = (selectedKeys, confirm) => {
+    confirm();
+    this.setState({ searchText: selectedKeys[0] });
+  };
+
+  handleReset = clearFilters => {
+    clearFilters();
+    this.setState({ searchText: "" });
+  };
+  ///////////////////////
+
   showModal = () => {
     this.setState({
       visible: true
@@ -139,6 +186,31 @@ class Exchange extends Component {
   };
 
   render() {
+    const columns = [
+      {
+        title: "_id",
+        dataIndex: "_id",
+        key: "_id"
+      },
+      {
+        title: "Age",
+        dataIndex: "nick",
+        key: "nick",
+        ...this.getColumnSearchProps("nick")
+      },
+      {
+        title: "Title",
+        dataIndex: "title",
+        key: "title",
+        ...this.getColumnSearchProps("title")
+      },
+      {
+        title: "Content",
+        key: "content",
+        dataIndex: "content",
+        ...this.getColumnSearchProps("content")
+      }
+    ];
     const { visible, confirmLoading, ModalText, visibles } = this.state;
     const { posts } = this.state;
     return (

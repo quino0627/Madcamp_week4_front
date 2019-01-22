@@ -190,7 +190,7 @@ class Chat extends Component {
           messages={this.state.messages}
           currentMember={this.state.member}
         />
-        <Input onSendMessage={this.onSendMessage} />
+        <Input className="input" onSendMessage={this.onSendMessage} />
       </div>
     );
   }

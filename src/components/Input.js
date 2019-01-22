@@ -21,6 +21,7 @@ class Input extends Component {
       <div className="Input">
         <form onSubmit={e => this.onSubmit(e)}>
           <input
+            className="input"
             onChange={e => this.onChange(e)}
             value={this.state.text}
             type="text"

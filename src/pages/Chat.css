@@ -80,7 +80,7 @@ form {
   margin: 0 auto 40px;
 }
 
-input {
+.input {
   padding: 5px;
   font-size: 16px;
   border-radius: 8px;

@@ -29,7 +29,6 @@ class Post extends Component {
           </div>
           <div className="post__columns">{this.state.date1}</div>
           <div className="post__columns">{this.state.content1}</div>
-          <button type="submit">more..</button>
         </form>
       </div>
     );

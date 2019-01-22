@@ -1,0 +1,10 @@
+.notice__column {
+  padding: 20px 23vw;
+}
+
+.notice__column1 {
+  padding: 20px 23vw;
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-end;
+}

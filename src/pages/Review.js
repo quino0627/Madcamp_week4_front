@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import Post from "../components/Post";
 import axios from "axios";
+import "./Review.css";
 import {
   Layout,
   Card,
@@ -88,7 +89,7 @@ class Review extends Component {
 
   _callApi = () => {
     return axiosInstance
-      .get("http://143.248.140.106:680/api/notice")
+      .get("http://143.248.140.106:680/api/review")
       .then(function(response) {
         console.log(response.data);
         return response.data;
@@ -116,7 +117,7 @@ class Review extends Component {
     // this.props.onCreate(this.state);
     console.log(this.state.postTitle + this.state.postContent);
     axiosInstance
-      .post("http://143.248.140.106:680/api/notice", {
+      .post("http://143.248.140.106:680/api/review", {
         nick: "Fred",
         title: this.state.postTitle,
         content: this.state.postContent
@@ -158,7 +159,7 @@ class Review extends Component {
     return (
       <div className={posts ? "Notice" : "Notice-loading"}>
         <Post callback={this.myCallback} />
-        <div className="notice__row">
+        <div className="review__row1">
           <div>
             <Button type="primary" onClick={this.showModal}>
               공지 올리기
@@ -176,7 +177,7 @@ class Review extends Component {
               <TextArea
                 placeholder="Autosize height with minimum and maximum number of lines"
                 autosize={{ minRows: 2, maxRows: 6 }} */}
-              <form onSubmit={this.handleSubmit}>
+              <form onSubmit={this.handleSubmit} className="review__submit">
                 <input
                   placeholder="제목"
                   value={this.state.postTitle}
@@ -189,20 +190,6 @@ class Review extends Component {
                   onChange={this.handleChange}
                   name="postContent"
                 />
-                <div>
-                  <Input
-                    size="large"
-                    placeholder="large size"
-                    onChange={this.handleChange}
-                  />
-                  <div style={{ margin: "24px 0" }} />
-                  <TextArea
-                    placeholder="Autosize height with minimum and maximum number of lines"
-                    autosize={{ minRows: 5, maxRows: 10 }}
-                    onChange={this.handleChange}
-                  />
-                </div>
-                ,
               </form>
             </Modal>
             <Modal
@@ -213,7 +200,7 @@ class Review extends Component {
             />
           </div>
         </div>
-        <div className="notice__row">
+        <div className="review__row">
           {posts ? this._renderPosts() : "loading"}
         </div>
       </div>
