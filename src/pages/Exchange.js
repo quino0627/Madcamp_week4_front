@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import axios from "axios";
+import Highlighter from "react-highlight-words";
 import {
   Layout,
   Menu,
@@ -39,60 +40,19 @@ const columns = [
     title: "Content",
     key: "content",
     dataIndex: "content"
-    /*
-    render: tags => (
-      <span>
-        {tags.map(tag => (
-          <Tag color="blue" key={tag}>
-            {tag}
-          </Tag>
-        ))}
-      </span>
-    )*/
-  } /*
-  {
-    title: "Action",
-    key: "action",
-    render: (text, record) => (
-      <span>
-        <a href="javascript:;">Invite {record._id}</a>
-        <Divider type="vertical" />
-        <a href="javascript:;">Delete</a>
-      </span>
-    )
-  }*/
-];
-/*
-const data = [
-  {
-    key: "1",
-    name: "John Brown",
-    age: 32,
-    address: "New York No. 1 Lake Park",
-    tags: ["nice", "developer"]
-  },
-  {
-    key: "2",
-    name: "Jim Green",
-    age: 42,
-    address: "London No. 1 Lake Park",
-    tags: ["loser"]
-  },
-  {
-    key: "3",
-    name: "Joe Black",
-    age: 32,
-    address: "Sidney No. 1 Lake Park",
-    tags: ["cool", "teacher"]
   }
 ];
-*/
+const renderModal = record => record.title;
 class Exchange extends Component {
   state = {
     //title: "",
     visible: false,
     ModalText: "",
-    confirmLoading: ""
+    confirmLoading: "",
+    visibles: false,
+    titles: "",
+    contents: "",
+    searchText: ""
   };
   showModal = () => {
     this.setState({
@@ -103,6 +63,12 @@ class Exchange extends Component {
     console.log("Clicked cancel button");
     this.setState({
       visible: false
+    });
+  };
+  handleCancels = () => {
+    console.log("Clicked cancel button");
+    this.setState({
+      visibles: false
     });
   };
   handleOk = e => {
@@ -140,6 +106,12 @@ class Exchange extends Component {
         console.log(error);
       });
   };
+  handleOks = e => {
+    console.log(e);
+    this.setState({
+      visibles: false
+    });
+  };
   componentDidMount() {
     this._getPosts();
   }
@@ -165,6 +137,7 @@ class Exchange extends Component {
       [e.target.name]: e.target.value
     });
   };
+
   render() {
     const { visible, confirmLoading, ModalText, visibles } = this.state;
     const { posts } = this.state;
@@ -215,7 +188,30 @@ class Exchange extends Component {
             ,
           </form>
         </Modal>
-        <Table columns={columns} dataSource={this.state.posts} />
+        <Modal
+          title={this.state.titles}
+          visible={this.state.visibles}
+          onOk={this.handleOks}
+          onCancel={this.handleCancels}
+        >
+          <span>{this.state.contents}</span>
+        </Modal>
+        <Table
+          onRow={(record, rowIndex) => {
+            return {
+              onClick: e => {
+                console.log(record.title + " " + rowIndex);
+                this.setState({
+                  visibles: true,
+                  titles: record.title,
+                  contents: record.content
+                });
+              }
+            };
+          }}
+          columns={columns}
+          dataSource={this.state.posts}
+        />
       </div>
     );
   }
